@@ -6,28 +6,28 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    background: #0A0A0A;
+    background: #01082D;
     color: #FFFFFF;
+    font-family: var(--font-nunito), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   ::selection {
-    background: #F5C518;
-    color: #0A0A0A;
+    background: #ADE1FB;
+    color: #01082D;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    font-family: var(--font-nunito), system-ui, sans-serif;
   }
 }
 
 @layer utilities {
   .focus-ring {
-    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow rounded-sm;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-sm;
   }
   .glass {
-    background: rgba(20, 20, 20, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  .glass-light {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(4, 29, 86, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
