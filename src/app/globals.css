@@ -3,24 +3,31 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    background: #F5EFE0;
-    color: #1A1A1A;
+    background: #0A0A0A;
+    color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
   }
   ::selection {
-    background: #E8A317;
-    color: #1A1A1A;
+    background: #F5C518;
+    color: #0A0A0A;
   }
 }
 
 @layer utilities {
   .focus-ring {
-    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber rounded-sm;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow rounded-sm;
+  }
+  .glass {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .glass-light {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 }
