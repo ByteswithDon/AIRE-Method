@@ -335,7 +335,7 @@ export default function Home() {
                 (e.currentTarget as HTMLElement).style.background = C.accent;
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}>
-              <DownloadIcon size={12} /> Download Facilitation Guide
+              <DownloadIcon size={12} /> Download the Sample Facilitation Guide
             </a>
             <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20%E2%80%94%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20AIRE%20Method.%0A%0A"
               className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg transition-all focus-ring"
