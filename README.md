@@ -48,4 +48,4 @@ AIRE grew out of my work in platform and technology operations. I shared it with
 
 ---
 
-*Created by Lyndonia Jane · [LinkedIn](https://www.linkedin.com/in/lyndonia/) · [GitHub](https://github.com/byteswithdon)*
+*Created by Lyndonia · [LinkedIn](https://www.linkedin.com/in/lyndonia/) · [GitHub](https://github.com/byteswithdon)*
