@@ -77,7 +77,7 @@ export default function AssessmentPage() {
               style={{ background: "rgba(173,225,251,0.1)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}>
               Prototype
             </span>
-            <span className="text-xs font-semibold" style={{ color: C.subtle }}>
+            <span className="text-xs font-semibold" style={{ color: C.muted }}>
               {currentIndex + 1} / {QUESTIONS.length}
             </span>
           </div>
@@ -91,7 +91,7 @@ export default function AssessmentPage() {
 
         {/* Demo notice */}
         <div className="px-6 md:px-10 py-2 text-xs font-medium"
-          style={{ background: "rgba(173,225,251,0.03)", borderBottom: `1px solid ${C.border}`, color: C.subtle }}>
+          style={{ background: "rgba(173,225,251,0.03)", borderBottom: `1px solid ${C.border}`, color: C.muted }}>
           Demo mode. Responses are stored in your browser session only and will not be saved.
         </div>
       </header>
@@ -101,21 +101,21 @@ export default function AssessmentPage() {
         <aside className="md:w-64 px-6 md:px-8 py-10 flex flex-col gap-8 shrink-0"
           style={{ borderRight: `1px solid ${C.border}` }}>
           <div>
-            <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.subtle }}>
+            <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.muted }}>
               Dimension
             </p>
             <div className="flex items-center gap-3">
               <span className="text-4xl" style={{ fontWeight: 900, color: dimColor }}>{dim.letter}</span>
               <div>
                 <div className="text-sm font-bold">{dim.key}</div>
-                <div className="text-xs font-medium mt-0.5" style={{ color: C.subtle }}>{dim.desc}</div>
+                <div className="text-xs font-medium mt-0.5" style={{ color: C.muted }}>{dim.desc}</div>
               </div>
             </div>
           </div>
 
           {/* Progress dots */}
           <div className="hidden md:block">
-            <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.subtle }}>Progress</p>
+            <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.muted }}>Progress</p>
             <div className="flex flex-col gap-3">
               {DIMENSIONS.map((d, di) => {
                 const dimQs     = QUESTIONS.filter(q => q.dimension === d.key);

@@ -69,7 +69,7 @@ export default function ResultsPage() {
           </div>
         </nav>
         <div className="px-6 md:px-12 py-2 text-xs font-medium"
-          style={{ background: "rgba(173,225,251,0.03)", borderBottom: `1px solid ${C.border}`, color: C.subtle }}>
+          style={{ background: "rgba(173,225,251,0.03)", borderBottom: `1px solid ${C.border}`, color: C.muted }}>
           Demo mode. These results are session-only and have not been saved to any database.
         </div>
       </header>

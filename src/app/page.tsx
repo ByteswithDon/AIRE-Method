@@ -190,7 +190,7 @@ export default function Home() {
             style={{ background: "rgba(173,225,251,0.12)", color: C.accent, border: `1px solid rgba(173,225,251,0.25)` }}>
             Prototype
           </span>
-          <span style={{ color: C.subtle }}>
+          <span style={{ color: C.muted }}>
             Demonstration only. Responses are <strong className="text-white font-bold">not saved</strong> and no database is connected.
           </span>
         </div>
