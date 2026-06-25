@@ -100,24 +100,6 @@ export default function Home() {
               <GitHubIcon />
               <span className="hidden sm:inline">GitHub</span>
             </a>
-
-            <a
-              href="/AIRE-Companion-Guide.pdf"
-              download
-              className="flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg transition-all focus-ring"
-              style={{ background: "rgba(173,225,251,0.1)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.18)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(173,225,251,0.15)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.1)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}
-            >
-              <DownloadIcon />
-              <span className="hidden sm:inline">Companion Guide</span>
-            </a>
           </div>
         </nav>
 
