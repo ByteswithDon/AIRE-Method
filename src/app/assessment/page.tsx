@@ -7,23 +7,23 @@ import Link from "next/link";
 import { QUESTIONS, DIMENSIONS, type Answer } from "@/lib/assessment";
 
 const C = {
-  bg:      "#020A30",
-  card:    "#0D2260",
-  mid:     "#081840",
-  surface: "#0F2573",
+  bg:      "#0D2255",
+  card:    "#163070",
+  mid:     "#091A45",
+  surface: "#1A3A80",
   accent:  "#ADE1FB",
-  border:  "rgba(173,225,251,0.08)",
-  muted:   "rgba(173,225,251,0.65)",
-  subtle:  "rgba(173,225,251,0.35)",
+  border:  "rgba(173,225,251,0.1)",
+  muted:   "rgba(173,225,251,0.72)",
+  subtle:  "rgba(173,225,251,0.4)",
 };
 
-// Neumorphic shadow tokens
-const raised   = "-6px -6px 14px rgba(22,60,170,0.55), 6px 6px 18px rgba(0,2,12,0.95)";
-const pressed  = "inset 4px 4px 10px rgba(0,2,12,0.85), inset -3px -3px 8px rgba(22,60,170,0.4)";
-const btnRaised = "-5px -5px 12px rgba(22,60,170,0.5), 5px 5px 14px rgba(0,2,12,0.92)";
-const btnHover  = "-7px -7px 16px rgba(38,108,169,0.5), 7px 7px 20px rgba(0,2,12,0.99), 0 0 24px rgba(173,225,251,0.2)";
+// Neumorphic shadow tokens — medium-tone base unlocks both light and dark directions
+const raised   = "-8px -8px 18px rgba(50,100,220,0.65), 8px 8px 22px rgba(0,5,25,0.92)";
+const pressed  = "inset 5px 5px 12px rgba(0,5,25,0.88), inset -4px -4px 10px rgba(50,100,220,0.45)";
+const btnRaised = "-5px -5px 14px rgba(50,100,220,0.55), 5px 5px 16px rgba(0,5,25,0.9)";
+const btnHover  = "-8px -8px 18px rgba(70,130,240,0.55), 8px 8px 22px rgba(0,5,25,0.95), 0 0 28px rgba(173,225,251,0.25)";
 const btnGradient = "linear-gradient(135deg, #C4EAFE 0%, #ADE1FB 45%, #7EC8E3 100%)";
-const trackInset  = "inset 3px 3px 7px rgba(0,2,12,0.88), inset -2px -2px 5px rgba(22,60,170,0.4)";
+const trackInset  = "inset 4px 4px 9px rgba(0,5,25,0.85), inset -3px -3px 7px rgba(50,100,220,0.42)";
 
 const DIM_COLORS = ["#ADE1FB", "#7EB8D4", "#ADE1FB", "#7EB8D4"];
 
@@ -256,7 +256,7 @@ export default function AssessmentPage() {
                       border: `1px solid rgba(173,225,251,0.06)`,
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.boxShadow = "-7px -7px 16px rgba(38,108,169,0.45), 7px 7px 20px rgba(0,2,12,0.97)";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "-8px -8px 18px rgba(70,130,240,0.55), 8px 8px 22px rgba(0,5,25,0.95)";
                       (e.currentTarget as HTMLElement).style.color = "#fff";
                     }}
                     onMouseLeave={e => {

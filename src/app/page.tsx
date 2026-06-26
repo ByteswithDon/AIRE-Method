@@ -11,31 +11,31 @@ const fade = (delay = 0) => ({
 });
 
 const C = {
-  bg:      "#020A30",
-  card:    "#0D2260",
-  mid:     "#081840",
-  surface: "#0F2573",
-  blue:    "#266CA9",
+  bg:      "#0D2255",
+  card:    "#163070",
+  mid:     "#091A45",
+  surface: "#1A3A80",
+  blue:    "#3A8FD4",
   accent:  "#ADE1FB",
-  muted:   "rgba(173,225,251,0.65)",
-  subtle:  "rgba(173,225,251,0.35)",
-  border:  "rgba(173,225,251,0.08)",
+  muted:   "rgba(173,225,251,0.72)",
+  subtle:  "rgba(173,225,251,0.4)",
+  border:  "rgba(173,225,251,0.1)",
 };
 
-// Neumorphic shadow tokens
+// Neumorphic shadow tokens — medium-tone base unlocks both light and dark directions
 const raised =
-  "-7px -7px 16px rgba(22,60,170,0.6), 7px 7px 20px rgba(0,2,12,0.97)";
+  "-8px -8px 18px rgba(50,100,220,0.65), 8px 8px 22px rgba(0,5,25,0.92)";
 const raisedHover =
-  "-10px -10px 22px rgba(38,108,169,0.55), 10px 10px 28px rgba(0,2,12,0.99)";
+  "-11px -11px 24px rgba(70,130,240,0.6), 11px 11px 28px rgba(0,5,25,0.96), 0 0 20px rgba(173,225,251,0.08)";
 const btnShadow =
-  "-5px -5px 12px rgba(22,60,170,0.5), 5px 5px 14px rgba(0,2,12,0.95)";
+  "-5px -5px 14px rgba(50,100,220,0.55), 5px 5px 16px rgba(0,5,25,0.9)";
 const btnShadowHover =
-  "-7px -7px 16px rgba(38,108,169,0.5), 7px 7px 20px rgba(0,2,12,0.99), 0 0 24px rgba(173,225,251,0.2)";
+  "-8px -8px 18px rgba(70,130,240,0.55), 8px 8px 22px rgba(0,5,25,0.95), 0 0 28px rgba(173,225,251,0.25)";
 const btnGradient = `linear-gradient(135deg, #C4EAFE 0%, #ADE1FB 45%, #7EC8E3 100%)`;
 const secondaryShadow =
-  "-4px -4px 10px rgba(22,60,170,0.45), 4px 4px 12px rgba(0,2,12,0.92)";
+  "-4px -4px 12px rgba(50,100,220,0.5), 4px 4px 14px rgba(0,5,25,0.88)";
 const secondaryShadowHover =
-  "-6px -6px 14px rgba(38,108,169,0.45), 6px 6px 16px rgba(0,2,12,0.97)";
+  "-6px -6px 16px rgba(70,130,240,0.5), 6px 6px 18px rgba(0,5,25,0.94)";
 
 const DIMENSIONS = [
   {
@@ -134,7 +134,7 @@ export default function Home() {
               initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
-              style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, background: "rgba(6,22,64,0.97)" }}
+              style={{ borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, background: "rgba(9,26,69,0.97)" }}
             >
               <div className="px-6 md:px-12 py-8 max-w-3xl">
                 <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.accent }}>About</p>
@@ -211,7 +211,7 @@ export default function Home() {
             initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-10 overflow-hidden"
-            style={{ borderBottom: `1px solid ${C.border}`, background: "rgba(6,22,64,0.97)" }}
+            style={{ borderBottom: `1px solid ${C.border}`, background: "rgba(9,26,69,0.97)" }}
           >
             <div className="px-6 md:px-12 py-8 max-w-3xl">
               <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.blue }}>Context &amp; Intent</p>
@@ -308,7 +308,7 @@ export default function Home() {
                       style={{
                         background: isActive ? C.mid : "transparent",
                         boxShadow: isActive
-                          ? "inset 4px 4px 10px rgba(0,2,12,0.85), inset -3px -3px 8px rgba(22,60,170,0.4)"
+                          ? "inset 5px 5px 12px rgba(0,5,25,0.88), inset -4px -4px 10px rgba(50,100,220,0.45)"
                           : "none",
                       }}
                     >
@@ -327,7 +327,7 @@ export default function Home() {
             {/* Content panel — inset well, slides content in */}
             <div className="rounded-2xl overflow-hidden" style={{
               background: C.mid,
-              boxShadow: "inset 3px 3px 8px rgba(0,2,12,0.82), inset -3px -3px 6px rgba(22,60,170,0.38)",
+              boxShadow: "inset 4px 4px 10px rgba(0,5,25,0.85), inset -4px -4px 10px rgba(50,100,220,0.42)",
               border: `1px solid rgba(173,225,251,0.05)`,
               minHeight: 160,
             }}>
