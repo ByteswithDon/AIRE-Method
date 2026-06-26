@@ -35,7 +35,7 @@ const DIMENSIONS = [
     desc: "Deployment & tooling",
     color: C.blue,
     illustration: "/illustrations/106.Tools.svg",
-    full: "This is where the rubber meets the road. Are tools actually deployed and in use? Is there a real process for evaluating and selecting them? Implementation is about whether decisions are turning into working systems that people actually use.",
+    full: "Take a moment to reflect. Are tools actually deployed and in use? Is there a real process for evaluating and selecting them? Implementation is about whether decisions are turning into working systems that people actually use.",
   },
   {
     letter: "R",
