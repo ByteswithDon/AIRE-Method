@@ -55,12 +55,6 @@ const DIMENSIONS = [
   },
 ];
 
-const STATS = [
-  { num: "12",  label: "Assessment cells" },
-  { num: "4×3", label: "Framework matrix" },
-  { num: "30",  label: "Day action pathway" },
-];
-
 export default function Home() {
   const [aboutOpen, setAboutOpen]   = useState(false);
   const [bioOpen,   setBioOpen]     = useState(false);
@@ -318,52 +312,20 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* RIGHT: Illustration + glance grid + stats */}
+        {/* RIGHT: Illustration */}
         <motion.div
           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55, delay: 0.25 }}
-          className="flex-1 flex flex-col items-center justify-center p-8 lg:p-16 gap-10"
+          className="flex-1 flex items-center justify-center p-8 lg:p-16"
           style={{ background: C.bgAlt, borderLeft: `1px solid ${C.border}` }}
         >
-          {/* Illustration card */}
-          <div className="w-full max-w-xs flex items-center justify-center"
-            style={{ background: C.bg, borderRadius: 16, border: `1px solid ${C.border}`, padding: "2rem", minHeight: 240 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={activeIdx !== null ? DIMENSIONS[activeIdx].illustration : "/illustrations/592.Tech-Briefing.svg"}
-              alt={activeIdx !== null ? DIMENSIONS[activeIdx].name : "Technology readiness overview"}
-              width={200} height={200}
-              style={{ width: "100%", maxWidth: 200, height: "auto", display: "block" }}
-            />
-          </div>
-
-          {/* Glance grid */}
-          <div className="w-full max-w-xs">
-            <p className="text-xs font-bold tracking-[0.15em] uppercase mb-4" style={{ color: C.textSubtle }}>The framework at a glance</p>
-            <div className="grid grid-cols-2 gap-2">
-              {DIMENSIONS.map(dim => (
-                <div key={dim.letter} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg"
-                  style={{ background: C.bg, border: `1px solid ${C.border}` }}>
-                  <span style={{ fontWeight: 900, color: dim.color, fontSize: 18, lineHeight: 1, minWidth: 16 }}>{dim.letter}</span>
-                  <div>
-                    <div className="text-xs font-semibold" style={{ color: C.text }}>{dim.name}</div>
-                    <div style={{ fontSize: 10, color: C.textSubtle }}>{dim.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div className="w-full max-w-xs flex gap-3">
-            {STATS.map(s => (
-              <div key={s.num} className="flex-1 px-3 py-3 rounded-lg text-center"
-                style={{ background: C.bg, border: `1px solid ${C.border}` }}>
-                <div className="text-lg font-black mb-0.5" style={{ color: C.navy }}>{s.num}</div>
-                <div className="text-xs" style={{ color: C.textSubtle }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={activeIdx !== null ? DIMENSIONS[activeIdx].illustration : "/illustrations/592.Tech-Briefing.svg"}
+            alt={activeIdx !== null ? DIMENSIONS[activeIdx].name : "Technology readiness overview"}
+            width={360} height={360}
+            style={{ width: "100%", maxWidth: 360, height: "auto", display: "block" }}
+          />
         </motion.div>
       </main>
 
