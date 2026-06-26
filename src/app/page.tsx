@@ -232,7 +232,7 @@ export default function Home() {
             style={{ color: C.textMuted }}
           >
             A structured framework for measuring where your organization
-            actually stands on technology adoption — and what to do next.
+            actually stands on technology adoption and what to do next.
           </motion.p>
 
           {/* AIRE dimension accordion */}
