@@ -26,7 +26,7 @@ const DIMENSIONS = [
     name: "Approach",
     desc: "Vision & strategic stance",
     color: C.accent,
-    illustration: "/illustrations/strategy.svg",
+    illustration: "/illustrations/148.Strategy.svg",
     full: "This is about how your organization has defined where it's headed with technology. Do you have a documented strategy? Is leadership aligned on what responsible technology use actually looks like? That's what Approach is measuring.",
   },
   {
@@ -34,7 +34,7 @@ const DIMENSIONS = [
     name: "Implementation",
     desc: "Deployment & tooling",
     color: C.blue,
-    illustration: "/illustrations/tools.svg",
+    illustration: "/illustrations/106.Tools.svg",
     full: "This is where the rubber meets the road. Are tools actually deployed and in use? Is there a real process for evaluating and selecting them? Implementation is about whether decisions are turning into working systems that people actually use.",
   },
   {
@@ -42,7 +42,7 @@ const DIMENSIONS = [
     name: "Responsibility",
     desc: "Ethics & privacy",
     color: C.accent,
-    illustration: "/illustrations/checklist.svg",
+    illustration: "/illustrations/340.Checklist.svg",
     full: "Technology use comes with real obligations. Responsibility looks at whether your organization has policies in place, handles data with care, and has oversight structures that keep things accountable. It's not just compliance. It's how you build trust.",
   },
   {
@@ -50,7 +50,7 @@ const DIMENSIONS = [
     name: "Enablement",
     desc: "Staff capacity & culture",
     color: C.blue,
-    illustration: "/illustrations/collaborative-work.svg",
+    illustration: "/illustrations/597.Collaborative-Work.svg",
     full: "Tools don't adopt themselves. Enablement is about whether your people have the training, the support, and the confidence to actually use what's been put in front of them. That means programs, champions, and a culture where it's okay to try things and figure it out.",
   },
 ];
@@ -330,7 +330,7 @@ export default function Home() {
             style={{ background: C.bg, borderRadius: 16, border: `1px solid ${C.border}`, padding: "2rem", minHeight: 240 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={activeIdx !== null ? DIMENSIONS[activeIdx].illustration : "/illustrations/tech-briefing.svg"}
+              src={activeIdx !== null ? DIMENSIONS[activeIdx].illustration : "/illustrations/592.Tech-Briefing.svg"}
               alt={activeIdx !== null ? DIMENSIONS[activeIdx].name : "Technology readiness overview"}
               width={200} height={200}
               style={{ width: "100%", maxWidth: 200, height: "auto", display: "block" }}
