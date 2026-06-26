@@ -185,14 +185,7 @@ export default function ResultsPage() {
             </a>
           </div>
 
-          <p className="text-xs font-medium" style={{ color: C.subtle }}>
-            You can also reach me directly at{" "}
-            <a href="mailto:lyndoniamckenzie@gmail.com"
-              className="underline underline-offset-2 hover:opacity-80 transition-opacity"
-              style={{ color: C.muted }}>
-              lyndoniamckenzie@gmail.com
-            </a>
-          </p>
+         
         </motion.div>
       </main>
 
