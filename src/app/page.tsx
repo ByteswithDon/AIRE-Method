@@ -65,7 +65,7 @@ export default function Home() {
   const [aboutOpen, setAboutOpen]   = useState(false);
   const [bioOpen,   setBioOpen]     = useState(false);
   const [introOpen, setIntroOpen]   = useState(false);
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeIdx, setActiveIdx]   = useState<number | null>(null);
 
   return (
     <div className="min-h-screen flex flex-col font-sans overflow-x-hidden" style={{ background: C.bg, color: C.text }}>
@@ -80,14 +80,14 @@ export default function Home() {
               className="text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
               style={{ color: C.textMuted }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = C.text; (e.currentTarget as HTMLElement).style.background = C.bgAlt; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = C.textMuted; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = C.textMuted; (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >About</button>
 
             <a href="https://www.linkedin.com/in/lyndonia/" target="_blank" rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
               style={{ color: C.textMuted }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = C.text; (e.currentTarget as HTMLElement).style.background = C.bgAlt; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = C.textMuted; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = C.textMuted; (e.currentTarget as HTMLElement).style.background = "transparent"; }}
               aria-label="LinkedIn"
             ><LinkedInIcon /><span>LinkedIn</span></a>
 
@@ -95,7 +95,7 @@ export default function Home() {
               className="hidden sm:flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
               style={{ color: C.textMuted }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = C.text; (e.currentTarget as HTMLElement).style.background = C.bgAlt; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = C.textMuted; (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = C.textMuted; (e.currentTarget as HTMLElement).style.background = "transparent"; }}
               aria-label="GitHub"
             ><GitHubIcon /><span>GitHub</span></a>
 
@@ -207,45 +207,105 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero */}
+      {/* HERO */}
       <main id="main-content" className="flex-1 flex flex-col lg:flex-row">
 
-        {/* Left */}
-        <div className="flex flex-col justify-center px-6 md:px-12 py-16 lg:py-24 lg:max-w-[52%]">
+        {/* LEFT: AIRE breakdown */}
+        <div className="flex flex-col justify-center px-6 md:px-12 py-14 lg:py-20 lg:max-w-[54%]">
 
           <motion.p
-            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className="text-xs font-bold tracking-[0.22em] uppercase mb-5"
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.06 }}
+            className="text-xs font-bold tracking-[0.22em] uppercase mb-4"
             style={{ color: C.accent }}
           >
             Technology Readiness Diagnostic
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.16 }}
-            className="leading-none mb-6"
-            style={{ fontSize: "clamp(48px, 7vw, 80px)", letterSpacing: "-0.03em", fontWeight: 900, color: C.navy }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.14 }}
+            className="mb-4 leading-none"
+            style={{ fontSize: "clamp(40px, 6vw, 68px)", letterSpacing: "-0.03em", fontWeight: 900, color: C.navy }}
           >
-            GAP<br />
-            <span style={{ color: C.accent }}>Assessment</span>
+            The <span style={{ color: C.accent }}>AIRE</span><br />Method
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.24 }}
-            className="text-base leading-relaxed max-w-md mb-10"
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.22 }}
+            className="text-base leading-relaxed max-w-lg mb-10"
             style={{ color: C.textMuted }}
           >
-            Measure your organization&rsquo;s readiness across the four dimensions
-            of technology adoption and get a structured 30-day correction pathway.
+            A structured framework for measuring where your organization
+            actually stands on technology adoption — and what to do next.
           </motion.p>
 
+          {/* AIRE dimension accordion */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.3 }}
+            className="flex flex-col mb-10"
+            style={{ borderTop: `1px solid ${C.border}` }}
           >
+            {DIMENSIONS.map((dim, i) => {
+              const isOpen = activeIdx === i;
+              return (
+                <div key={dim.letter} style={{ borderBottom: `1px solid ${C.border}` }}>
+                  <button
+                    onClick={() => setActiveIdx(isOpen ? null : i)}
+                    className="w-full flex items-center gap-5 py-4 text-left"
+                  >
+                    <span
+                      className="shrink-0 flex items-center justify-center font-black"
+                      style={{
+                        width: 44, height: 44, borderRadius: 8, fontSize: 22, lineHeight: 1,
+                        background: isOpen ? dim.color + "18" : C.bgAlt,
+                        color: isOpen ? dim.color : C.textSubtle,
+                        border: `1px solid ${isOpen ? dim.color + "40" : C.border}`,
+                        transition: "all 0.15s",
+                      }}
+                    >
+                      {dim.letter}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="text-sm font-bold" style={{ color: isOpen ? dim.color : C.text, transition: "color 0.15s" }}>
+                          {dim.name}
+                        </span>
+                        <span className="text-xs" style={{ color: C.textSubtle }}>{dim.desc}</span>
+                      </div>
+                    </div>
+                    <span style={{ color: C.textSubtle, fontSize: 12, display: "inline-block", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}>
+                      ↓
+                    </span>
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex gap-4 pb-5 pl-14">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={dim.illustration} alt={dim.name} width={72} height={72}
+                            className="shrink-0" style={{ opacity: 0.85, borderRadius: 6 }} />
+                          <p className="text-sm leading-relaxed" style={{ color: C.textMuted }}>{dim.full}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4 }}>
             <Link href="/assessment"
               className="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-md transition-colors group"
               style={{ background: C.navy, color: "#FFFFFF" }}
@@ -256,120 +316,53 @@ export default function Home() {
               <span className="group-hover:translate-x-0.5 transition-transform inline-block">→</span>
             </Link>
           </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.42 }}
-            className="flex gap-4 mt-14 pt-10"
-            style={{ borderTop: `1px solid ${C.border}` }}
-          >
-            {STATS.map(s => (
-              <div key={s.num} className="px-4 py-3 rounded-lg" style={{ background: C.bgAlt, border: `1px solid ${C.border}` }}>
-                <div className="text-xl font-black mb-0.5" style={{ color: C.navy }}>{s.num}</div>
-                <div className="text-xs font-medium" style={{ color: C.textSubtle }}>{s.label}</div>
-              </div>
-            ))}
-          </motion.div>
         </div>
 
-        {/* Right: Dimension panel */}
+        {/* RIGHT: Illustration + glance grid + stats */}
         <motion.div
           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.55, delay: 0.3 }}
-          className="flex-1 flex items-center justify-center p-8 lg:p-16"
+          transition={{ duration: 0.55, delay: 0.25 }}
+          className="flex-1 flex flex-col items-center justify-center p-8 lg:p-16 gap-10"
           style={{ background: C.bgAlt, borderLeft: `1px solid ${C.border}` }}
         >
-          <div className="w-full max-w-sm flex flex-col gap-4">
+          {/* Illustration card */}
+          <div className="w-full max-w-xs flex items-center justify-center"
+            style={{ background: C.bg, borderRadius: 16, border: `1px solid ${C.border}`, padding: "2rem", minHeight: 240 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeIdx !== null ? DIMENSIONS[activeIdx].illustration : "/illustrations/tech-briefing.svg"}
+              alt={activeIdx !== null ? DIMENSIONS[activeIdx].name : "Technology readiness overview"}
+              width={200} height={200}
+              style={{ width: "100%", maxWidth: 200, height: "auto", display: "block" }}
+            />
+          </div>
 
-            {/* Hero illustration shown when nothing selected */}
-            <AnimatePresence>
-              {activeCard === null && (
-                <motion.div
-                  key="hero-illus"
-                  initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex justify-center"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/illustrations/tech-briefing.svg" alt="Technology readiness" width={200} height={150} style={{ opacity: 0.88 }} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Tab bar card */}
-            <div className="rounded-xl overflow-hidden" style={{ background: C.bg, border: `1px solid ${C.border}` }}>
-
-              {/* Tabs */}
-              <div className="flex" style={{ borderBottom: `1px solid ${C.border}` }}>
-                {DIMENSIONS.map((dim, i) => {
-                  const isActive = activeCard === i;
-                  return (
-                    <button
-                      key={dim.letter}
-                      onClick={() => setActiveCard(isActive ? null : i)}
-                      className="flex-1 py-3.5 flex flex-col items-center gap-1 transition-all duration-150 focus-ring"
-                      style={{
-                        background: isActive ? C.accentBg : "transparent",
-                        borderBottom: isActive ? `2px solid ${C.accent}` : "2px solid transparent",
-                        color: isActive ? C.accent : C.textSubtle,
-                      }}
-                      onMouseEnter={e => {
-                        if (!isActive) {
-                          (e.currentTarget as HTMLElement).style.background = C.bgAlt;
-                          (e.currentTarget as HTMLElement).style.color = C.textMuted;
-                        }
-                      }}
-                      onMouseLeave={e => {
-                        if (!isActive) {
-                          (e.currentTarget as HTMLElement).style.background = "transparent";
-                          (e.currentTarget as HTMLElement).style.color = C.textSubtle;
-                        }
-                      }}
-                    >
-                      <span style={{ fontWeight: 900, fontSize: 22, lineHeight: 1 }}>{dim.letter}</span>
-                      <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.03em" }}>{dim.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Content well */}
-              <div style={{ minHeight: 180 }}>
-                <AnimatePresence mode="wait">
-                  {activeCard !== null ? (
-                    <motion.div
-                      key={activeCard}
-                      initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                      className="p-5 flex gap-4"
-                    >
-                      <div className="shrink-0 flex items-start pt-1">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={DIMENSIONS[activeCard].illustration} alt={DIMENSIONS[activeCard].name} width={80} height={80} style={{ opacity: 0.9 }} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: DIMENSIONS[activeCard].color }}>
-                          {DIMENSIONS[activeCard].name}
-                        </p>
-                        <p className="text-xs mb-2.5" style={{ color: C.textSubtle }}>{DIMENSIONS[activeCard].desc}</p>
-                        <p className="text-sm leading-relaxed" style={{ color: C.textMuted }}>{DIMENSIONS[activeCard].full}</p>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="placeholder"
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                      className="flex flex-col items-center justify-center p-8 text-center"
-                      style={{ minHeight: 180 }}
-                    >
-                      <p className="text-xs font-semibold mb-1" style={{ color: C.textSubtle }}>Select a dimension</p>
-                      <p className="text-xs" style={{ color: "#CBD5E1" }}>Tap A · I · R · E above</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+          {/* Glance grid */}
+          <div className="w-full max-w-xs">
+            <p className="text-xs font-bold tracking-[0.15em] uppercase mb-4" style={{ color: C.textSubtle }}>The framework at a glance</p>
+            <div className="grid grid-cols-2 gap-2">
+              {DIMENSIONS.map(dim => (
+                <div key={dim.letter} className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg"
+                  style={{ background: C.bg, border: `1px solid ${C.border}` }}>
+                  <span style={{ fontWeight: 900, color: dim.color, fontSize: 18, lineHeight: 1, minWidth: 16 }}>{dim.letter}</span>
+                  <div>
+                    <div className="text-xs font-semibold" style={{ color: C.text }}>{dim.name}</div>
+                    <div style={{ fontSize: 10, color: C.textSubtle }}>{dim.desc}</div>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+
+          {/* Stats */}
+          <div className="w-full max-w-xs flex gap-3">
+            {STATS.map(s => (
+              <div key={s.num} className="flex-1 px-3 py-3 rounded-lg text-center"
+                style={{ background: C.bg, border: `1px solid ${C.border}` }}>
+                <div className="text-lg font-black mb-0.5" style={{ color: C.navy }}>{s.num}</div>
+                <div className="text-xs" style={{ color: C.textSubtle }}>{s.label}</div>
+              </div>
+            ))}
           </div>
         </motion.div>
       </main>
