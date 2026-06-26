@@ -11,9 +11,9 @@ const fade = (delay = 0) => ({
 });
 
 const C = {
-  bg:      "#01082D",
-  card:    "#061640",
-  mid:     "#0A1E52",
+  bg:      "#020A30",
+  card:    "#0D2260",
+  mid:     "#081840",
   surface: "#0F2573",
   blue:    "#266CA9",
   accent:  "#ADE1FB",
@@ -22,39 +22,20 @@ const C = {
   border:  "rgba(173,225,251,0.08)",
 };
 
-// Neumorphic shadows — 3-layer kit pattern: subtle near + opposing highlight + deep dark
-const raised = [
-  "2px 2px 5px rgba(1,8,45,0.55)",
-  "-5px -5px 18px rgba(10,30,82,0.5)",
-  "6px 6px 20px rgba(1,8,45,0.82)",
-].join(", ");
-const raisedHover = [
-  "2px 2px 6px rgba(1,8,45,0.6)",
-  "-7px -7px 22px rgba(38,108,169,0.18)",
-  "9px 9px 26px rgba(1,8,45,0.88)",
-].join(", ");
-const btnShadow = [
-  "2px 2px 4px rgba(1,8,45,0.5)",
-  "-3px -3px 10px rgba(10,30,82,0.45)",
-  "4px 4px 12px rgba(1,8,45,0.72)",
-].join(", ");
-const btnShadowHover = [
-  "2px 2px 5px rgba(1,8,45,0.55)",
-  "-4px -4px 14px rgba(38,108,169,0.16)",
-  "6px 6px 18px rgba(1,8,45,0.84)",
-  "0 0 20px rgba(173,225,251,0.14)",
-].join(", ");
+// Neumorphic shadow tokens
+const raised =
+  "-7px -7px 16px rgba(22,60,170,0.6), 7px 7px 20px rgba(0,2,12,0.97)";
+const raisedHover =
+  "-10px -10px 22px rgba(38,108,169,0.55), 10px 10px 28px rgba(0,2,12,0.99)";
+const btnShadow =
+  "-5px -5px 12px rgba(22,60,170,0.5), 5px 5px 14px rgba(0,2,12,0.95)";
+const btnShadowHover =
+  "-7px -7px 16px rgba(38,108,169,0.5), 7px 7px 20px rgba(0,2,12,0.99), 0 0 24px rgba(173,225,251,0.2)";
 const btnGradient = `linear-gradient(135deg, #C4EAFE 0%, #ADE1FB 45%, #7EC8E3 100%)`;
-const secondaryShadow = [
-  "2px 2px 5px rgba(1,8,45,0.55)",
-  "-3px -3px 10px rgba(10,30,82,0.4)",
-  "4px 4px 12px rgba(1,8,45,0.72)",
-].join(", ");
-const secondaryShadowHover = [
-  "3px 3px 7px rgba(1,8,45,0.6)",
-  "-4px -4px 12px rgba(38,108,169,0.15)",
-  "5px 5px 16px rgba(1,8,45,0.8)",
-].join(", ");
+const secondaryShadow =
+  "-4px -4px 10px rgba(22,60,170,0.45), 4px 4px 12px rgba(0,2,12,0.92)";
+const secondaryShadowHover =
+  "-6px -6px 14px rgba(38,108,169,0.45), 6px 6px 16px rgba(0,2,12,0.97)";
 
 const DIMENSIONS = [
   {
@@ -102,11 +83,10 @@ export default function Home() {
         backgroundSize: "100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px",
       }} />
 
-      {/* ── Nav ── */}
+      {/* Nav */}
       <header className="relative z-10">
         <nav className="px-6 md:px-12 py-5 flex items-center justify-between">
           <span className="text-sm font-extrabold tracking-[0.2em] uppercase text-white">AIRE™</span>
-
           <div className="flex items-center gap-4">
             <button
               onClick={() => { setAboutOpen(!aboutOpen); setBioOpen(false); }}
@@ -114,9 +94,7 @@ export default function Home() {
               style={{ color: C.muted }}
               onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
               onMouseLeave={e => (e.currentTarget.style.color = C.muted)}
-            >
-              About
-            </button>
+            >About</button>
 
             <a href="https://www.linkedin.com/in/lyndonia/" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm font-semibold transition-colors focus-ring px-3 py-2 rounded-full"
@@ -124,9 +102,7 @@ export default function Home() {
               onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
               onMouseLeave={e => (e.currentTarget.style.color = C.muted)}
               aria-label="LinkedIn"
-            >
-              <LinkedInIcon /><span className="hidden sm:inline">LinkedIn</span>
-            </a>
+            ><LinkedInIcon /><span className="hidden sm:inline">LinkedIn</span></a>
 
             <a href="https://github.com/byteswithdon" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm font-semibold transition-colors focus-ring px-3 py-2 rounded-full"
@@ -134,9 +110,7 @@ export default function Home() {
               onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
               onMouseLeave={e => (e.currentTarget.style.color = C.muted)}
               aria-label="GitHub"
-            >
-              <GitHubIcon /><span className="hidden sm:inline">GitHub</span>
-            </a>
+            ><GitHubIcon /><span className="hidden sm:inline">GitHub</span></a>
 
             <Link href="/assessment"
               className="text-sm font-extrabold px-5 py-2.5 rounded-full transition-all focus-ring"
@@ -149,9 +123,7 @@ export default function Home() {
                 (e.currentTarget as HTMLElement).style.boxShadow = btnShadow;
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
               }}
-            >
-              Begin Assessment
-            </Link>
+            >Begin Assessment</Link>
           </div>
         </nav>
 
@@ -195,7 +167,7 @@ export default function Home() {
                           <div className="flex flex-wrap gap-2">
                             {["SharePoint Online","M365 Administration","LMS Administration","Power Automate","Power BI","Information Architecture","Content Migration","WCAG / ADA","API Integration","SCORM / xAPI","SQL","Supabase","Vercel","GitHub","Docebo","Canvas","Moodle","Notion","Scribe","Zendesk"].map(s => (
                               <span key={s} className="text-xs px-3 py-1 rounded-full font-semibold"
-                                style={{ background: "rgba(173,225,251,0.06)", color: C.muted, border: `1px solid rgba(173,225,251,0.1)`, boxShadow: "2px 2px 5px rgba(1,8,45,0.5), -2px -2px 6px rgba(10,30,82,0.38), 2px 2px 6px rgba(1,8,45,0.6)" }}>
+                                style={{ background: C.card, color: C.muted, border: `1px solid rgba(173,225,251,0.08)`, boxShadow: secondaryShadow }}>
                                 {s}
                               </span>
                             ))}
@@ -211,12 +183,12 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
-      {/* ── Prototype notice ── */}
+      {/* Prototype notice */}
       <div className="relative z-10 px-6 md:px-12 py-3 flex flex-wrap items-center gap-3 justify-between text-xs"
-        style={{ background: "rgba(173,225,251,0.03)", borderBottom: `1px solid ${C.border}` }}>
+        style={{ background: "rgba(173,225,251,0.02)", borderBottom: `1px solid ${C.border}` }}>
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 rounded-full text-xs font-extrabold tracking-wider uppercase"
-            style={{ background: "rgba(173,225,251,0.07)", color: C.accent, border: `1px solid rgba(173,225,251,0.18)`, boxShadow: "2px 2px 5px rgba(1,8,45,0.5), -2px -2px 7px rgba(10,30,82,0.4), 2px 2px 7px rgba(1,8,45,0.6)" }}>
+            style={{ background: C.card, color: C.accent, border: `1px solid rgba(173,225,251,0.12)`, boxShadow: secondaryShadow }}>
             Prototype
           </span>
           <span style={{ color: C.muted }}>
@@ -254,7 +226,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row">
 
         {/* Left */}
@@ -297,11 +269,11 @@ export default function Home() {
           </motion.div>
 
           {/* Stats */}
-          <motion.div {...fade(0.44)} className="flex gap-6 mt-16 pt-10" style={{ borderTop: `1px solid ${C.border}` }}>
+          <motion.div {...fade(0.44)} className="flex gap-5 mt-16 pt-10" style={{ borderTop: `1px solid ${C.border}` }}>
             {STATS.map(s => (
               <div key={s.num}
                 className="px-5 py-4 rounded-2xl"
-                style={{ background: C.card, boxShadow: raised, border: `1px solid rgba(173,225,251,0.05)` }}
+                style={{ background: C.card, boxShadow: raised, border: `1px solid rgba(173,225,251,0.06)` }}
               >
                 <div className="text-2xl mb-1" style={{ fontWeight: 900, color: C.accent }}>{s.num}</div>
                 <div className="text-xs font-bold tracking-wide uppercase" style={{ color: C.subtle }}>{s.label}</div>
@@ -310,7 +282,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Right — dimension cards */}
+        {/* Right: dimension cards */}
         <div className="flex-1 flex items-center justify-center p-8 lg:p-16">
           <div className="grid grid-cols-2 gap-5 w-full max-w-sm">
             {DIMENSIONS.map((dim, i) => (
@@ -355,7 +327,7 @@ export default function Home() {
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-6"
-              style={{ background: "rgba(1,8,45,0.8)", backdropFilter: "blur(8px)" }}
+              style={{ background: "rgba(2,10,48,0.85)", backdropFilter: "blur(8px)" }}
               onClick={() => setActiveCard(null)}
             >
               <motion.div
@@ -367,12 +339,7 @@ export default function Home() {
                 className="relative w-full max-w-md rounded-2xl p-8"
                 style={{
                   background: C.card,
-                  boxShadow: [
-                    "2px 2px 6px rgba(1,8,45,0.6)",
-                    "-8px -8px 24px rgba(10,30,82,0.5)",
-                    "10px 10px 30px rgba(1,8,45,0.9)",
-                    "0 0 0 1px rgba(173,225,251,0.08)",
-                  ].join(", "),
+                  boxShadow: `-10px -10px 24px rgba(22,60,170,0.55), 12px 12px 32px rgba(0,2,12,0.99), 0 0 0 1px rgba(173,225,251,0.08)`,
                   border: `1px solid rgba(173,225,251,0.1)`,
                 }}
               >
@@ -383,9 +350,7 @@ export default function Home() {
                   onMouseEnter={e => (e.currentTarget.style.boxShadow = secondaryShadowHover)}
                   onMouseLeave={e => (e.currentTarget.style.boxShadow = secondaryShadow)}
                   aria-label="Close"
-                >
-                  ✕
-                </button>
+                >✕</button>
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -418,9 +383,7 @@ export default function Home() {
                     style={{ color: C.muted, background: C.mid, boxShadow: secondaryShadow }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = secondaryShadowHover; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = secondaryShadow; }}
-                  >
-                    ← Prev
-                  </button>
+                  >← Prev</button>
 
                   <div className="flex gap-2">
                     {DIMENSIONS.map((_, i) => (
@@ -440,9 +403,7 @@ export default function Home() {
                     style={{ color: C.bg, background: btnGradient, boxShadow: btnShadow }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = btnShadowHover; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = btnShadow; }}
-                  >
-                    Next →
-                  </button>
+                  >Next →</button>
                 </div>
               </motion.div>
             </motion.div>
@@ -450,7 +411,7 @@ export default function Home() {
         </AnimatePresence>
       </main>
 
-      {/* ── Footer ── */}
+      {/* Footer */}
       <footer className="relative z-10 px-6 md:px-12 py-8" style={{ borderTop: `1px solid ${C.border}` }}>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <span className="text-xs font-semibold" style={{ color: C.subtle }}>
@@ -468,9 +429,7 @@ export default function Home() {
                 (e.currentTarget as HTMLElement).style.boxShadow = btnShadow;
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
               }}
-            >
-              <DownloadIcon size={12} /> Download the Sample Facilitation Guide
-            </a>
+            ><DownloadIcon size={12} /> Download the Sample Facilitation Guide</a>
             <a
               href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20%E2%80%94%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20AIRE%20Method.%0A%0A"
               className="inline-flex items-center gap-1.5 text-xs font-bold px-5 py-2.5 rounded-full transition-all focus-ring"
@@ -488,9 +447,7 @@ export default function Home() {
                 (e.currentTarget as HTMLElement).style.boxShadow = secondaryShadow;
                 (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
               }}
-            >
-              Request More Information
-            </a>
+            >Request More Information</a>
           </div>
         </div>
       </footer>
@@ -498,7 +455,6 @@ export default function Home() {
   );
 }
 
-/* ── Icons ── */
 function LinkedInIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
