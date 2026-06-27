@@ -1,9 +1,9 @@
-// AIRE™ GAP Assessment — data model
+// AIRE™ GAP Assessment: data model
 // Two axes: four AIRE™ stages (Approach, Implementation, Responsibility, Enablement)
 // × three GAP dimensions (Goals, Actions, Parameters) = 12 diagnostic cells.
 //
 // Built for AI governance & adoption, and applicable to any technology adoption
-// decision — because nearly every tool an organization adopts now carries an AI
+// decision, because nearly every tool an organization adopts now carries an AI
 // component, and the choices around it deserve the same structured process.
 
 export type Stage  = "Approach" | "Implementation" | "Responsibility" | "Enablement";
@@ -363,7 +363,7 @@ export function maturityLabel(avg: number): string {
 export function buildAIPrompt(answers: Answer[]): string {
   const line = (id: string) => `${cellById(id).stage} × ${cellById(id).gap}: ${answerFor(answers, id) ?? "_"}`;
   const top = priorityGaps(answers).slice(0, 3)
-    .map((g, i) => `${i + 1}. ${g.cell.stage} × ${g.cell.gap} — ${g.cell.gapName}: ${g.cell.gapDescription}`)
+    .map((g, i) => `${i + 1}. ${g.cell.stage} × ${g.cell.gap} - ${g.cell.gapName}: ${g.cell.gapDescription}`)
     .join("\n");
 
   return `You are an expert in AI governance and organizational change. I am going to share the results of my AIRE™ GAP Assessment and need you to help me build a complete, practical, ready-to-use AIRE™ Implementation and Execution Plan for my organization.
@@ -385,5 +385,5 @@ ${top || "1. [add your priority gaps]"}
 5. Suggest two questions I should be asking about the gaps I did not prioritize.
 
 [OUTPUT FORMAT]
-Use clear headings for each request. Plain, direct language. Avoid generic advice — be specific to the scores above. If you need to clarify something before you begin, ask one question at a time.`;
+Use clear headings for each request. Plain, direct language. Avoid generic advice. Be specific to the scores above. If you need to clarify something before you begin, ask one question at a time.`;
 }

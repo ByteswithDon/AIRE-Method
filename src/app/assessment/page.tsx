@@ -97,7 +97,7 @@ export default function AssessmentPage() {
       </header>
 
       <main id="main-content" className="flex-1 flex flex-col md:flex-row">
-        {/* Sidebar — live 4×3 grid */}
+        {/* Sidebar: live 4×3 grid */}
         <aside className="md:w-72 px-6 md:px-8 py-10 flex flex-col gap-8 shrink-0"
           style={{ borderRight: `1px solid ${C.border}` }}>
           <div>
