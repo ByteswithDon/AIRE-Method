@@ -7,28 +7,16 @@ import Link from "next/link";
 import { QUESTIONS, DIMENSIONS, type Answer } from "@/lib/assessment";
 
 const C = {
-  bg:           "#FFFFFF",
-  bgAlt:        "#F8FAFC",
-  bgSection:    "#F1F5F9",
-  border:       "#E2E8F0",
-  borderAccent: "#BAE6FD",
-  text:         "#0F172A",
-  textMuted:    "#64748B",
-  textSubtle:   "#94A3B8",
-  accent:       "#0EA5E9",
-  accentDark:   "#0284C7",
-  accentBg:     "#F0F9FF",
-  blue:         "#1D4ED8",
-  navy:         "#0F172A",
+  bg:      "#01082D",
+  surface: "#041D56",
+  mid:     "#0F2573",
+  accent:  "#ADE1FB",
+  border:  "rgba(173,225,251,0.09)",
+  muted:   "rgba(173,225,251,0.65)",
+  subtle:  "rgba(173,225,251,0.35)",
 };
 
-const DIM_COLORS  = [C.accent, C.blue, C.accent, C.blue];
-const DIM_ILLUSTS = [
-  "/illustrations/148.Strategy.svg",
-  "/illustrations/106.Tools.svg",
-  "/illustrations/340.Checklist.svg",
-  "/illustrations/597.Collaborative-Work.svg",
-];
+const DIM_COLORS = ["#ADE1FB", "#266CA9", "#ADE1FB", "#266CA9"];
 
 export default function AssessmentPage() {
   const router = useRouter();
@@ -43,7 +31,6 @@ export default function AssessmentPage() {
   const dimIndex  = DIMENSIONS.findIndex(d => d.key === question.dimension);
   const dim       = DIMENSIONS[dimIndex];
   const dimColor  = DIM_COLORS[dimIndex];
-  const dimIllust = DIM_ILLUSTS[dimIndex];
 
   function handleNext() {
     if (selected === null) return;
@@ -71,112 +58,72 @@ export default function AssessmentPage() {
   }
 
   const variants = {
-    enter:  (d: number) => ({ opacity: 0, x: d * 20 }),
+    enter:  (d: number) => ({ opacity: 0, x: d * 24 }),
     center: { opacity: 1, x: 0 },
-    exit:   (d: number) => ({ opacity: 0, x: d * -20 }),
+    exit:   (d: number) => ({ opacity: 0, x: d * -24 }),
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans" style={{ background: C.bg, color: C.text }}>
-
+    <div className="min-h-screen flex flex-col font-sans text-white" style={{ background: C.bg }}>
       {/* Nav */}
       <header>
-        <nav className="px-6 md:px-10 py-4 flex items-center justify-between"
+        <nav className="px-6 md:px-10 py-5 flex items-center justify-between"
           style={{ borderBottom: `1px solid ${C.border}` }}>
-          <Link href="/" className="text-sm font-extrabold tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
-            style={{ color: C.navy }}>
+          <Link href="/" className="text-sm font-extrabold tracking-[0.18em] uppercase hover:opacity-70 transition-opacity focus-ring">
             AIRE™
           </Link>
           <div className="flex items-center gap-4">
-            <span className="text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider"
-              style={{ background: C.accentBg, color: C.accentDark, border: `1px solid ${C.borderAccent}` }}>
+            <span className="text-xs px-2.5 py-0.5 rounded-full font-extrabold tracking-wider uppercase"
+              style={{ background: "rgba(173,225,251,0.1)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}>
               Prototype
             </span>
-            <span className="text-xs font-medium tabular-nums" style={{ color: C.textMuted }}>
+            <span className="text-xs font-semibold" style={{ color: C.muted }}>
               {currentIndex + 1} / {QUESTIONS.length}
             </span>
           </div>
         </nav>
 
         {/* Progress bar */}
-        <div className="px-6 md:px-10 py-3" style={{ borderBottom: `1px solid ${C.border}`, background: C.bgAlt }}>
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: C.bgSection }}>
-            <motion.div
-              className="h-full rounded-full"
-              style={{ background: C.accent }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            />
-          </div>
-          <div className="flex justify-between mt-2">
-            <span className="text-xs" style={{ color: C.textSubtle }}>
-              {dim.key} · Cell {question.cell} of 3
-            </span>
-            <span className="text-xs font-bold" style={{ color: C.accent }}>
-              {Math.round(progress)}%
-            </span>
-          </div>
+        <div className="h-0.5" style={{ background: "rgba(173,225,251,0.08)" }}>
+          <motion.div className="h-full rounded-full" style={{ background: C.accent }}
+            animate={{ width: `${progress}%` }} transition={{ duration: 0.4, ease: "easeOut" }} />
         </div>
 
         {/* Demo notice */}
-        <div className="px-6 md:px-10 py-2 text-xs"
-          style={{ background: C.bgAlt, borderBottom: `1px solid ${C.border}`, color: C.textSubtle }}>
-          Demo mode. Responses are stored in your browser session only.
+        <div className="px-6 md:px-10 py-2 text-xs font-medium"
+          style={{ background: "rgba(173,225,251,0.03)", borderBottom: `1px solid ${C.border}`, color: C.muted }}>
+          Demo mode. Responses are stored in your browser session only and will not be saved.
         </div>
       </header>
 
       <main id="main-content" className="flex-1 flex flex-col md:flex-row">
-
         {/* Sidebar */}
-        <aside className="md:w-60 shrink-0 flex flex-col gap-6 px-6 md:px-7 py-8"
-          style={{ borderRight: `1px solid ${C.border}`, background: C.bgAlt }}>
-
-          {/* Dimension illustration */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={dimIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.22 }}
-              className="flex justify-center"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={dimIllust} alt={dim.key} width={120} height={100} style={{ opacity: 0.85 }} />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Dimension badge */}
+        <aside className="md:w-64 px-6 md:px-8 py-10 flex flex-col gap-8 shrink-0"
+          style={{ borderRight: `1px solid ${C.border}` }}>
           <div>
-            <p className="text-xs font-bold tracking-[0.15em] uppercase mb-3" style={{ color: C.textSubtle }}>
+            <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.muted }}>
               Dimension
             </p>
-            <div className="rounded-lg p-4" style={{
-              background: C.bg,
-              border: `1px solid ${C.border}`,
-              borderLeft: `3px solid ${dimColor}`,
-            }}>
-              <div className="flex items-center gap-3">
-                <span style={{ fontWeight: 900, color: dimColor, fontSize: 28, lineHeight: 1 }}>{dim.letter}</span>
-                <div>
-                  <div className="text-sm font-bold" style={{ color: C.text }}>{dim.key}</div>
-                  <div className="text-xs mt-0.5" style={{ color: C.textMuted }}>{dim.desc}</div>
-                </div>
+            <div className="flex items-center gap-3">
+              <span className="text-4xl" style={{ fontWeight: 900, color: dimColor }}>{dim.letter}</span>
+              <div>
+                <div className="text-sm font-bold">{dim.key}</div>
+                <div className="text-xs font-medium mt-0.5" style={{ color: C.muted }}>{dim.desc}</div>
               </div>
             </div>
           </div>
 
           {/* Progress dots */}
           <div className="hidden md:block">
-            <p className="text-xs font-bold tracking-[0.15em] uppercase mb-3" style={{ color: C.textSubtle }}>Progress</p>
-            <div className="flex flex-col gap-3.5">
+            <p className="text-xs font-extrabold tracking-[0.18em] uppercase mb-4" style={{ color: C.muted }}>Progress</p>
+            <div className="flex flex-col gap-3">
               {DIMENSIONS.map((d, di) => {
                 const dimQs     = QUESTIONS.filter(q => q.dimension === d.key);
                 const isCurrent = d.key === question.dimension;
                 const dc        = DIM_COLORS[di];
                 return (
                   <div key={d.key} className="flex items-center gap-3">
-                    <span className="text-xs w-4 font-bold" style={{ color: isCurrent ? dc : C.textSubtle }}>
+                    <span className="text-xs w-4 font-extrabold" style={{ color: isCurrent ? dc : "rgba(173,225,251,0.2)" }}>
                       {d.letter}
                     </span>
                     <div className="flex gap-1.5">
@@ -184,14 +131,11 @@ export default function AssessmentPage() {
                         const ans   = answers.find(a => a.questionId === q.id);
                         const isCur = q.id === question.id;
                         return (
-                          <div key={q.id}
-                            className="w-2.5 h-2.5 rounded-full transition-all duration-300"
+                          <div key={q.id} className="w-2 h-2 rounded-full transition-all duration-300"
                             style={{
-                              background: isCur ? dc : ans ? dc + "66" : C.border,
-                              outline: isCur ? `2px solid ${dc}40` : "none",
-                              outlineOffset: 1,
-                            }}
-                          />
+                              background: isCur ? dc : ans ? "rgba(173,225,251,0.45)" : "rgba(173,225,251,0.1)",
+                              boxShadow:  isCur ? `0 0 6px ${dc}90` : "none",
+                            }} />
                         );
                       })}
                     </div>
@@ -203,120 +147,88 @@ export default function AssessmentPage() {
         </aside>
 
         {/* Question area */}
-        <div className="flex-1 flex flex-col justify-center px-6 md:px-14 py-12 max-w-2xl">
+        <div className="flex-1 flex flex-col justify-center px-6 md:px-14 py-14 max-w-2xl">
           <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={question.id}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            >
+            <motion.div key={question.id} custom={direction}
+              variants={variants} initial="enter" animate="center" exit="exit"
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
 
-              <h1 className="text-2xl md:text-3xl leading-snug mb-3 font-extrabold"
-                style={{ letterSpacing: "-0.015em", color: C.navy }}>
+              <p className="text-xs font-extrabold tracking-[0.2em] uppercase mb-6" style={{ color: dimColor }}>
+                {dim.key} · Cell {question.cell} of 3
+              </p>
+
+              <h1 className="text-2xl md:text-3xl leading-snug mb-3" style={{ letterSpacing: "-0.01em", fontWeight: 800 }}>
                 {question.text}
               </h1>
 
               {question.subtext && (
-                <p className="text-sm mb-9" style={{ color: C.textMuted }}>{question.subtext}</p>
+                <p className="text-sm mb-10 font-medium" style={{ color: C.muted }}>{question.subtext}</p>
               )}
 
-              {/* Radio options */}
-              <fieldset className="flex flex-col gap-2.5 mb-10">
+              <fieldset className="flex flex-col gap-2.5 mb-12">
                 <legend className="sr-only">Rate your organization from 1 to 5</legend>
                 {question.options.map(opt => {
                   const isSel = selected === opt.value;
                   return (
-                    <label
-                      key={opt.value}
-                      className="flex items-center gap-4 px-4 py-3.5 rounded-lg cursor-pointer transition-all duration-150"
+                    <label key={opt.value}
+                      className="flex items-center gap-4 px-5 py-4 rounded-xl cursor-pointer transition-all duration-200"
                       style={{
-                        background: isSel ? C.accentBg : C.bg,
-                        border: `1px solid ${isSel ? C.borderAccent : C.border}`,
-                        borderLeft: `${isSel ? 3 : 1}px solid ${isSel ? C.accent : C.border}`,
+                        background: isSel ? "rgba(173,225,251,0.1)" : "rgba(4,29,86,0.5)",
+                        border:     isSel ? "1px solid rgba(173,225,251,0.35)" : `1px solid ${C.border}`,
+                        boxShadow:  isSel ? "0 0 20px rgba(173,225,251,0.1)" : "none",
                       }}
                       onMouseEnter={e => {
-                        if (!isSel) (e.currentTarget as HTMLElement).style.background = C.bgAlt;
+                        if (!isSel) {
+                          (e.currentTarget as HTMLElement).style.background = "rgba(15,37,115,0.6)";
+                          (e.currentTarget as HTMLElement).style.border = "1px solid rgba(173,225,251,0.15)";
+                        }
                       }}
                       onMouseLeave={e => {
-                        if (!isSel) (e.currentTarget as HTMLElement).style.background = C.bg;
+                        if (!isSel) {
+                          (e.currentTarget as HTMLElement).style.background = "rgba(4,29,86,0.5)";
+                          (e.currentTarget as HTMLElement).style.border = `1px solid ${C.border}`;
+                        }
                       }}
                     >
-                      <input
-                        type="radio"
-                        name="answer"
-                        value={opt.value}
-                        checked={isSel}
-                        onChange={() => setSelected(opt.value)}
-                        className="sr-only"
-                      />
-
-                      {/* Radio circle */}
-                      <div
-                        className="shrink-0 flex items-center justify-center transition-all duration-150"
-                        style={{
-                          width: 18,
-                          height: 18,
-                          borderRadius: "50%",
-                          border: `2px solid ${isSel ? C.accent : C.border}`,
-                          background: C.bg,
-                        }}
-                      >
-                        {isSel && <div style={{ width: 8, height: 8, borderRadius: "50%", background: C.accent }} />}
-                      </div>
-
-                      <span className="text-xs font-bold w-4 tabular-nums shrink-0"
-                        style={{ color: isSel ? C.accent : C.textSubtle }}>
+                      <input type="radio" name="answer" value={opt.value}
+                        checked={isSel} onChange={() => setSelected(opt.value)} className="sr-only" />
+                      <span className="text-xs font-extrabold w-5 tabular-nums"
+                        style={{ color: isSel ? C.accent : C.subtle }}>
                         {opt.value}
                       </span>
-                      <span className="text-sm" style={{ color: isSel ? C.text : C.textMuted, fontWeight: isSel ? 500 : 400 }}>
-                        {opt.label}
-                      </span>
+                      <span className="text-sm font-semibold">{opt.label}</span>
+                      {isSel && <span className="ml-auto text-xs font-bold" style={{ color: C.accent }}>✓</span>}
                     </label>
                   );
                 })}
               </fieldset>
 
-              {/* Navigation */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {currentIndex > 0 && (
-                  <button
-                    onClick={handleBack}
-                    className="text-sm font-medium px-5 py-2.5 rounded-md transition-colors"
-                    style={{ background: C.bg, color: C.textMuted, border: `1px solid ${C.border}` }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.background = C.bgAlt;
-                      (e.currentTarget as HTMLElement).style.color = C.text;
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.background = C.bg;
-                      (e.currentTarget as HTMLElement).style.color = C.textMuted;
-                    }}
-                  >← Back</button>
+                  <button onClick={handleBack}
+                    className="text-sm font-bold hover:opacity-60 transition-opacity focus-ring"
+                    style={{ color: C.muted }}>
+                    ← Back
+                  </button>
                 )}
-
-                <button
-                  onClick={handleNext}
-                  disabled={selected === null}
-                  className="text-sm font-semibold px-7 py-2.5 rounded-md transition-colors inline-flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                  style={{
-                    background: selected !== null ? C.navy : C.bgSection,
-                    color: selected !== null ? "#FFFFFF" : C.textSubtle,
-                  }}
+                <button onClick={handleNext} disabled={selected === null}
+                  className="text-sm font-extrabold px-8 py-3.5 rounded-xl transition-all focus-ring inline-flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                  style={{ background: C.accent, color: C.bg, minHeight: 44 }}
                   onMouseEnter={e => {
-                    if (selected !== null) (e.currentTarget as HTMLElement).style.background = "#1E293B";
+                    if (selected !== null) {
+                      (e.currentTarget as HTMLElement).style.background = "#C8ECFD";
+                      (e.currentTarget as HTMLElement).style.boxShadow = "0 0 28px rgba(173,225,251,0.35)";
+                      (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
+                    }
                   }}
                   onMouseLeave={e => {
-                    if (selected !== null) (e.currentTarget as HTMLElement).style.background = C.navy;
-                  }}
-                >
+                    (e.currentTarget as HTMLElement).style.background = C.accent;
+                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                    (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                  }}>
                   {isLast ? "View Results →" : "Continue →"}
                 </button>
               </div>
-
             </motion.div>
           </AnimatePresence>
         </div>
