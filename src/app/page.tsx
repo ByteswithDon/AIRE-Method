@@ -30,7 +30,7 @@ const DIMENSIONS = [
   },
   {
     letter: "I", name: "Implementation", desc: "Deployment & oversight", color: "#266CA9",
-    full: "This is where the rubber meets the road. Are tools actually deployed, monitored, and on an approved list? Is there a real process for evaluating and selecting them? Implementation is about whether decisions are turning into working systems people actually use — not shadow tools no one is watching.",
+    full: "This is where the rubber meets the road. Are tools actually deployed, monitored, and on an approved list? Is there a real process for evaluating and selecting them? Implementation is about whether decisions are turning into working systems people actually use, not shadow tools no one is watching.",
   },
   {
     letter: "R", name: "Responsibility", desc: "Ethics & privacy", color: "#ADE1FB",
@@ -68,7 +68,7 @@ export default function Home() {
         backgroundSize: "100% 100%, 100% 100%, 56px 56px, 56px 56px",
       }} />
 
-      {/* ── Nav ── */}
+      {/* Nav */}
       <header className="relative z-10">
         <nav
           className="px-6 md:px-12 py-5 flex items-center justify-between"
@@ -177,7 +177,7 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
-      {/* ── Prototype notice ── */}
+      {/* Prototype notice */}
       <div className="relative z-10 px-6 md:px-12 py-3 flex flex-wrap items-center gap-3 justify-between text-xs"
         style={{ background: "rgba(173,225,251,0.04)", borderBottom: `1px solid rgba(173,225,251,0.08)` }}>
         <div className="flex items-center gap-2">
@@ -222,7 +222,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row">
         {/* Left */}
         <div className="flex flex-col justify-center px-6 md:px-12 py-20 max-w-2xl">
@@ -241,7 +241,7 @@ export default function Home() {
 
           <motion.p {...fade(0.26)} className="text-base leading-relaxed max-w-md mb-10 font-medium" style={{ color: C.muted }}>
             A 12-cell diagnostic that maps your organization&rsquo;s readiness across the four
-            AIRE&trade; stages and three GAP dimensions &mdash; then names your gaps and a 30-day
+            AIRE&trade; stages and three GAP dimensions, then names your gaps and a 30-day
             pathway. Built for AI governance, and it fits any technology adoption decision,
             because almost every tool now carries an AI component.
           </motion.p>
@@ -278,7 +278,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Right — dimension cards */}
+        {/* Right: dimension cards */}
         <div className="flex-1 flex items-center justify-center p-8 lg:p-16">
           <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
             {DIMENSIONS.map((dim, i) => (
@@ -414,7 +414,7 @@ export default function Home() {
         </AnimatePresence>
       </main>
 
-      {/* ── Footer ── */}
+      {/* Footer */}
       <footer className="relative z-10 px-6 md:px-12 py-8"
         style={{ borderTop: `1px solid ${C.border}` }}>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
@@ -435,7 +435,7 @@ export default function Home() {
               }}>
               <DownloadIcon size={12} /> Download the Sample Facilitation Guide
             </a>
-            <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20%E2%80%94%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20AIRE%20Method.%0A%0A"
+            <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20-%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20AIRE%20Method.%0A%0A"
               className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg transition-all focus-ring"
               style={{ background: "rgba(173,225,251,0.08)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}
               onMouseEnter={e => {
@@ -448,12 +448,16 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <p className="text-xs mt-6 pt-6" style={{ color: C.subtle, borderTop: `1px solid ${C.border}` }}>
+          &copy; 2026 Lyndonia McKenzie. AIRE&trade; &amp; GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.
+          This prototype is for demonstration purposes.
+        </p>
       </footer>
     </div>
   );
 }
 
-/* ── Icons ── */
+/* Icons */
 function LinkedInIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">

@@ -21,12 +21,13 @@ const C = {
 function cellBg(score: number | null, color: string) {
   if (score == null) return "rgba(173,225,251,0.05)";
   if (score >= 3) return color + "33";
-  return "rgba(248,113,113,0.16)"; // priority gap — warm flag
+  return "rgba(248,113,113,0.16)"; // priority gap, warm flag
 }
 
 export default function ResultsPage() {
   const [answers, setAnswers] = useState<Answer[] | null>(null);
   const [copied, setCopied]   = useState(false);
+  const [pdfBusy, setPdfBusy] = useState(false);
 
   useEffect(() => {
     const raw = sessionStorage.getItem("aire-answers");
@@ -59,6 +60,59 @@ export default function ResultsPage() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch { /* clipboard unavailable */ }
+  }
+
+  // Opens a clean, print-styled results sheet in a new tab and triggers the
+  // browser print dialog, where the user can "Save as PDF" to attach to an email.
+  function downloadPdf() {
+    if (pdfBusy || !answers) return;
+    setPdfBusy(true);
+    try {
+      const esc = (s: string) =>
+        s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c] as string));
+
+      const scoreRows = STAGES.map(s =>
+        GAPS.map(g => {
+          const v = answerFor(answers, `${s.letter}-${g.letter}`);
+          const isGap = v != null && v < 3;
+          return `<tr><td>${esc(s.key)} &times; ${esc(g.key)}</td>` +
+            `<td class="num">${v ?? "-"} / 4${isGap ? ' <span class="flag">gap</span>' : ""}</td></tr>`;
+        }).join("")
+      ).join("");
+
+      const gapBlocks = topGaps.length
+        ? topGaps.map((gp, i) =>
+            `<div class="gap"><h3>Priority ${i + 1}: ${esc(gp.cell.stage)} &times; ${esc(gp.cell.gap)}: ${esc(gp.cell.gapName)} (${gp.value}/4)</h3>` +
+            `<p>${esc(gp.cell.gapDescription)}</p>` +
+            `<ol>${gp.cell.nextSteps.map(st => `<li>${esc(st)}</li>`).join("")}</ol></div>`
+          ).join("")
+        : '<p class="muted">No cells scored below 3. Focus on raising your lowest cells to Established.</p>';
+
+      const html =
+        `<!doctype html><html><head><meta charset="utf-8"><title>AIRE GAP Assessment Results</title><style>` +
+        `*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#0F172A;margin:40px;line-height:1.55}` +
+        `h1{font-size:24px;margin:0 0 4px}.meta{color:#64748B;font-size:12px;margin-bottom:22px}` +
+        `.overall{font-size:18px;font-weight:800;margin:0 0 18px}` +
+        `h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#334155;border-bottom:1px solid #E2E8F0;padding-bottom:6px;margin:26px 0 12px}` +
+        `table{width:100%;border-collapse:collapse;font-size:13px}td{padding:5px 8px;border-bottom:1px solid #EEF2F7}` +
+        `.num{text-align:right}.flag{color:#B91C1C;font-weight:700;font-size:11px}` +
+        `.gap{margin:0 0 16px}.gap h3{font-size:14px;margin:0 0 4px;color:#B91C1C}.gap p{margin:0 0 6px;color:#475569;font-size:13px}` +
+        `.muted{color:#475569;font-size:13px}ol{margin:6px 0 0 18px;font-size:13px}li{margin:2px 0}` +
+        `.legal{margin-top:34px;border-top:1px solid #E2E8F0;padding-top:12px;color:#94A3B8;font-size:11px}` +
+        `@media print{body{margin:24px}}</style></head><body onload="window.print()">` +
+        `<h1>AIRE&trade; GAP Assessment Results</h1>` +
+        `<div class="meta">Generated ${esc(new Date().toLocaleDateString())} &middot; Prototype, demonstration data only</div>` +
+        `<div class="overall">Overall: ${overall.toFixed(1)} / 4 (${esc(label)})</div>` +
+        `<h2>Scores by cell</h2><table>${scoreRows}</table>` +
+        `<h2>Priority gaps and 30-day next steps</h2>${gapBlocks}` +
+        `<p class="legal">&copy; 2026 Lyndonia McKenzie. AIRE&trade; and GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.</p>` +
+        `</body></html>`;
+
+      const w = window.open("", "_blank");
+      if (w) { w.document.write(html); w.document.close(); }
+    } finally {
+      setPdfBusy(false);
+    }
   }
 
   return (
@@ -144,7 +198,7 @@ export default function ResultsPage() {
             ))}
           </div>
           <p className="text-xs mt-4" style={{ color: C.subtle }}>
-            Cells scoring below 3 are priority gaps — your highest-leverage starting points.
+            Cells scoring below 3 are priority gaps, your highest-leverage starting points.
           </p>
         </motion.div>
 
@@ -178,7 +232,7 @@ export default function ResultsPage() {
           </h2>
           <p className="text-xs mb-6" style={{ color: C.subtle }}>
             {gaps.length === 0
-              ? "No cells scored below 3. Your foundation is strong — focus on raising your lowest cells from In Progress to Established."
+              ? "No cells scored below 3. Your foundation is strong. Focus on raising your lowest cells from In Progress to Established."
               : `${gaps.length} cell${gaps.length > 1 ? "s" : ""} scored below 3. Start with the ${topGaps.length} below.`}
           </p>
 
@@ -218,7 +272,7 @@ export default function ResultsPage() {
               Recommended training pathway
             </h2>
             <p className="text-xs mb-6" style={{ color: C.subtle }}>
-              Your Enablement gaps point to specific learning. Equip the team with these before or after adoption — not just policy.
+              Your Enablement gaps point to specific learning. Equip the team with these before or after adoption, not just policy.
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               {enablementGaps.map(g => {
@@ -244,7 +298,7 @@ export default function ResultsPage() {
           </motion.div>
         )}
 
-        {/* Putting it all together — AI teammate prompt */}
+        {/* Putting it all together: AI teammate prompt */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }} className="mb-16 rounded-2xl p-8"
           style={{ background: "rgba(4,29,86,0.7)", border: `1px solid ${C.border}` }}>
@@ -252,7 +306,7 @@ export default function ResultsPage() {
             Putting it all together
           </h2>
           <p className="text-sm leading-relaxed mb-5" style={{ color: C.muted }}>
-            You did the hard thinking. Now use AI as a teammate — not to do the work, but to turn your scores and
+            You did the hard thinking. Now use AI as a teammate, not to do the work, but to turn your scores and
             priority gaps into a full execution plan. Copy the prompt below into ChatGPT, Copilot, or any tool you use.
             It is pre-filled with your results.
           </p>
@@ -276,18 +330,27 @@ export default function ResultsPage() {
           <div>
             <p className="text-sm font-bold mb-1">What&rsquo;s next?</p>
             <p className="text-xs font-medium" style={{ color: C.muted }}>
-              Download the companion guide or reach out directly. I&rsquo;m happy to answer questions, share more about the methodology, or talk through what this could look like for your organization.
+              Download your results as a PDF, grab the companion guide, or reach out directly. When you request more
+              information, attach your downloaded results PDF so I can speak to exactly where your organization stands.
+              I&rsquo;m happy to answer questions, share more about the methodology, or talk through what this could look like for your team.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="/AIRE-Companion-Guide.pdf" download
-              className="inline-flex items-center justify-center gap-2 text-sm font-extrabold px-6 py-3 rounded-xl transition-all focus-ring"
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+            <button onClick={downloadPdf} disabled={pdfBusy}
+              className="inline-flex items-center justify-center gap-2 text-sm font-extrabold px-6 py-3 rounded-xl transition-all focus-ring disabled:opacity-50"
               style={{ background: C.accent, color: C.bg }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "#C8ECFD"}
+              onMouseEnter={e => { if (!pdfBusy) (e.currentTarget as HTMLElement).style.background = "#C8ECFD"; }}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = C.accent}>
-              <DownloadIcon /> Download the Sample Facilitation Guide
+              <DownloadIcon /> {pdfBusy ? "Opening..." : "Download My Results (PDF)"}
+            </button>
+            <a href="/AIRE-Companion-Guide.pdf" download
+              className="inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3 rounded-xl transition-all focus-ring"
+              style={{ background: "rgba(173,225,251,0.08)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.15)"}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.08)"}>
+              <DownloadIcon /> Sample Facilitation Guide
             </a>
-            <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20%E2%80%94%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20the%20AIRE%20Method%20for%20my%20%5Btype%20of%20organization%5D.%20We%20are%20looking%20at%20%5Bdescribe%20the%20technology%20rollout%20or%20adoption%5D%20and%20I%20think%20this%20framework%20could%20be%20a%20great%20fit.%0A%0ALooking%20forward%20to%20connecting%2C%0A%5BYour%20name%5D"
+            <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20-%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20the%20AIRE%20Method%20for%20my%20%5Btype%20of%20organization%5D.%20We%20are%20looking%20at%20%5Bdescribe%20the%20technology%20rollout%20or%20adoption%5D%20and%20I%20think%20this%20framework%20could%20be%20a%20great%20fit.%0A%0AI%27ve%20attached%20my%20AIRE%20GAP%20Assessment%20results%20PDF%20for%20context.%0A%0ALooking%20forward%20to%20connecting%2C%0A%5BYour%20name%5D"
               className="inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3 rounded-xl transition-all focus-ring"
               style={{ background: "rgba(173,225,251,0.08)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.15)"}
@@ -315,6 +378,9 @@ export default function ResultsPage() {
             </div>
           ))}
         </div>
+        <p className="text-xs mt-8 leading-relaxed" style={{ color: C.subtle }}>
+          &copy; 2026 Lyndonia McKenzie. AIRE&trade; and GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.
+        </p>
       </footer>
     </div>
   );
