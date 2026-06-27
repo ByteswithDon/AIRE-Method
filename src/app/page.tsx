@@ -223,7 +223,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero */}
-      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row">
+      <main id="main-content" className="relative z-30 flex-1 flex flex-col lg:flex-row">
         {/* Left */}
         <div className="flex flex-col justify-center px-6 md:px-12 py-20 max-w-2xl">
           <motion.p {...fade(0.1)} className="text-xs font-extrabold tracking-[0.24em] uppercase mb-6" style={{ color: C.accent }}>
@@ -421,32 +421,6 @@ export default function Home() {
           <span className="text-xs font-semibold" style={{ color: C.subtle }}>
             AIRE™ · Technology Readiness &amp; Implementation Evaluation
           </span>
-          <div className="flex flex-wrap gap-3">
-            <a href="/AIRE-Companion-Guide.pdf" download
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg transition-all focus-ring"
-              style={{ background: C.accent, color: C.bg }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = "#C8ECFD";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(173,225,251,0.3)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = C.accent;
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}>
-              <DownloadIcon size={12} /> Download the Sample Facilitation Guide
-            </a>
-            <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20-%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27d%20love%20to%20learn%20more%20about%20the%20AIRE%20Method.%0A%0A"
-              className="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg transition-all focus-ring"
-              style={{ background: "rgba(173,225,251,0.08)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.15)";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.08)";
-              }}>
-              Request More Information
-            </a>
-          </div>
         </div>
         <p className="text-xs mt-6 pt-6" style={{ color: C.subtle, borderTop: `1px solid ${C.border}` }}>
           &copy; 2026 Lyndonia McKenzie. AIRE&trade; &amp; GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.
@@ -472,16 +446,6 @@ function GitHubIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-    </svg>
-  );
-}
-
-function DownloadIcon({ size = 14 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-      <polyline points="7 10 12 15 17 10"/>
-      <line x1="12" y1="15" x2="12" y2="3"/>
     </svg>
   );
 }
