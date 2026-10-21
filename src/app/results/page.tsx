@@ -105,7 +105,7 @@ export default function ResultsPage() {
         `<div class="overall">Overall: ${overall.toFixed(1)} / 4 (${esc(label)})</div>` +
         `<h2>Scores by cell</h2><table>${scoreRows}</table>` +
         `<h2>Priority gaps and 30-day next steps</h2>${gapBlocks}` +
-        `<p class="legal">&copy; 2026 Lyndonia McKenzie. AIRE&trade; and GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.</p>` +
+        `<p class="legal">&copy; 2026 Bytes with Don. AIRE&trade; and GAP&trade; are trademarks of Bytes with Don. All rights reserved.</p>` +
         `</body></html>`;
 
       const w = window.open("", "_blank");
@@ -350,7 +350,7 @@ export default function ResultsPage() {
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.08)"}>
               <DownloadIcon /> Sample Facilitation Guide
             </a>
-            <a href="mailto:lyndoniamckenzie@gmail.com?subject=AIRE%20Method%20-%20Request%20for%20More%20Information&body=Hi%20Lyndonia%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20the%20AIRE%20Method%20for%20my%20%5Btype%20of%20organization%5D.%20We%20are%20looking%20at%20%5Bdescribe%20the%20technology%20rollout%20or%20adoption%5D%20and%20I%20think%20this%20framework%20could%20be%20a%20great%20fit.%0A%0AI%27ve%20attached%20my%20AIRE%20GAP%20Assessment%20results%20PDF%20for%20context.%0A%0ALooking%20forward%20to%20connecting%2C%0A%5BYour%20name%5D"
+            <a href="mailto:byteswithdon@gmail.com?subject=AIRE%20Method%20-%20Request%20for%20More%20Information&body=Hi%20Don%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20the%20AIRE%20Method%20for%20my%20%5Btype%20of%20organization%5D.%20We%20are%20looking%20at%20%5Bdescribe%20the%20technology%20rollout%20or%20adoption%5D%20and%20I%20think%20this%20framework%20could%20be%20a%20great%20fit.%0A%0AI%27ve%20attached%20my%20AIRE%20GAP%20Assessment%20results%20PDF%20for%20context.%0A%0ALooking%20forward%20to%20connecting%2C%0A%5BYour%20name%5D"
               className="inline-flex items-center justify-center gap-2 text-sm font-bold px-6 py-3 rounded-xl transition-all focus-ring"
               style={{ background: "rgba(173,225,251,0.08)", color: C.accent, border: `1px solid rgba(173,225,251,0.2)` }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(173,225,251,0.15)"}
@@ -379,7 +379,7 @@ export default function ResultsPage() {
           ))}
         </div>
         <p className="text-xs mt-8 leading-relaxed" style={{ color: C.subtle }}>
-          &copy; 2026 Lyndonia McKenzie. AIRE&trade; and GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.
+          &copy; 2026 Bytes with Don. AIRE&trade; and GAP&trade; are trademarks of Bytes with Don. All rights reserved.
         </p>
       </footer>
     </div>
