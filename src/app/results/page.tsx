@@ -105,7 +105,7 @@ export default function ResultsPage() {
         `<div class="overall">Overall: ${overall.toFixed(1)} / 4 (${esc(label)})</div>` +
         `<h2>Scores by cell</h2><table>${scoreRows}</table>` +
         `<h2>Priority gaps and 30-day next steps</h2>${gapBlocks}` +
-        `<p class="legal">&copy; 2026 Lyndonia McKenzie. AIRE&trade; and GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.</p>` +
+        `<p class="legal">&copy; 2026 Bytes with Don. AIRE&trade; and GAP&trade; are trademarks of Bytes with Don. All rights reserved.</p>` +
         `</body></html>`;
 
       const w = window.open("", "_blank");
@@ -379,7 +379,7 @@ export default function ResultsPage() {
           ))}
         </div>
         <p className="text-xs mt-8 leading-relaxed" style={{ color: C.subtle }}>
-          &copy; 2026 Lyndonia McKenzie. AIRE&trade; and GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.
+          &copy; 2026 Bytes with Don. AIRE&trade; and GAP&trade; are trademarks of Bytes with Don. All rights reserved.
         </p>
       </footer>
     </div>

@@ -89,7 +89,7 @@ export default function Home() {
             </button>
 
             <a
-              href="https://www.linkedin.com/in/lyndonia/"
+              href="https://www.linkedin.com/company/byteswithdon/"
               target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm font-semibold transition-colors focus-ring"
               style={{ color: C.muted }}
@@ -428,7 +428,7 @@ export default function Home() {
           </span>
         </div>
         <p className="text-xs mt-6 pt-6" style={{ color: C.subtle, borderTop: `1px solid ${C.border}` }}>
-          &copy; 2026 Lyndonia McKenzie. AIRE&trade; &amp; GAP&trade; are trademarks of Lyndonia McKenzie. All rights reserved.
+          &copy; 2026 Bytes with Don. AIRE&trade; &amp; GAP&trade; are trademarks of Bytes with Don. All rights reserved.
           This prototype is for demonstration purposes.
         </p>
       </footer>
