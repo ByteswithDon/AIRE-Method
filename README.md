@@ -1,51 +1,75 @@
 # AIRE Method
 
-**A framework and prototype web app for guiding inclusive technology adoption in any organization, from evaluation to recommendation.**
+**A readiness framework for technology adoption, and a working prototype of its 12-cell diagnostic.**
 
-AIRE turns technology adoption into a shared, structured, and inclusive process. Deciding whether and how to adopt a tool shouldn't fall only to the technical experts in the room.
+[Try the prototype](https://aire-method.vercel.app/) · [Facilitation guide (PDF)](https://aire-method.vercel.app/AIRE-Companion-Guide.pdf)
 
 ---
 
-## Why AIRE
+## The problem
 
-Most technology adoption decisions skip the most important question: why are we doing this? They tend to happen among a small group of technical people, which leaves the folks who will actually use the tools without a real voice in the process.
+Most technology adoption decisions skip the most important question: why are we doing this?
 
-AIRE exists to change that. You shouldn't have to be a technologist to have a valid opinion about the technology that shapes your work. AIRE gives organizations a structured way to surface real needs, build conversation and community around them, and bring everyone, technical and non-technical, into the decision.
+They tend to happen among a small group of technical people, which leaves the people who will actually use the tools without a real voice. You shouldn't have to be a technologist to have a valid opinion about the technology that shapes your work.
 
-## What AIRE Stands For
+## The framework
 
-AIRE is a four-phase methodology:
+AIRE has four stages. Each one is a phase of the method and a lens in the diagnostic.
 
-- **A, Approach** · Observe, diagnose, and evaluate before a single tool is selected or platform is built.
-- **I, Implementation** · Analyze findings, decide, and build with precision. Every decision traces back to the Approach.
-- **R, Responsibility** · Accountability at every stage, with documentation that outlives the engagement.
-- **E, Enablement** · Train the team and hand off with clarity. Build systems people can sustain. The goal is capacity, not dependency.
+| Stage | What it covers |
+|---|---|
+| **A · Approach** | Observe, diagnose, and evaluate before any tool is chosen. Every later decision traces back here. |
+| **I · Implementation** | Analyze the findings, decide, and build with precision. |
+| **R · Responsibility** | Accountability at every stage, with documentation that outlives the project. |
+| **E · Enablement** | Train the team and hand off clearly. The goal is capacity, not dependency. |
 
-## From Spreadsheet to App
+Within each stage, readiness breaks down in one of three ways, called the GAP dimensions: **Goals**, **Actions**, and **Parameters**. Four stages by three dimensions makes a grid of 12 cells, and each cell is a specific question about readiness.
 
-AIRE began as an evaluation tool. It was a shareable spreadsheet (Google Sheets or Microsoft Excel) paired with a facilitation guide I developed and used with real stakeholders across different sectors.
+## How the prototype works
 
-This app turns that experience into something you can move through online. You work from the framework, respond to guided prompts, and the tool captures your inputs and surfaces tailored recommendations.
+```mermaid
+flowchart LR
+  A[Rate 12 cells<br/>two statements each] --> B[Gap profile<br/>scores by stage and dimension]
+  B --> C[Priority gaps<br/>any cell below 3]
+  C --> D[30-day steps<br/>three per gap]
+  D --> E[Take it further<br/>PDF, guide, AI prompt]
+```
 
-## How It Works
+1. **Rate.** For each cell, the person reads two statements and rates how true they are today, from 1 (Not Started) to 4 (Established).
+2. **See the profile.** Results show an overall score, scores by stage and by dimension, and the full matrix.
+3. **Name the gaps.** Any cell scoring below 3 becomes a priority gap, with a name, what it costs the organization, and three steps for the next 30 days.
+4. **Take it further.** Results can be saved as a PDF, the facilitation guide can be downloaded, and a ready-made prompt turns the results into a full plan with any AI assistant.
 
-- **Guided experience** · A step-by-step flow that walks an organization through the four AIRE phases.
-- **Backend** · Supabase, using SQL queries to capture and store inputs.
-- **Recommendation logic** · In-app logic evaluates responses against the uploaded framework to generate adoption recommendations.
-- **Frontend / Deployment** · Next.js · Vercel
+## Decisions
+
+| Decision | What I chose | What I didn't | Why |
+|---|---|---|---|
+| Where responses live | The browser session only | A database | The prototype proves the experience and the scoring logic first. Nothing is stored, so there's no personal data to protect yet. A production version would store responses so an organization can compare results over time. |
+| Saving results | The browser's print dialog, styled as a results sheet | A PDF library | No extra dependency, and every browser can already save as PDF. |
+| AI planning | A prompt the person copies into their own assistant | Calling an AI service from the app | No API keys or running costs, the person chooses their own tool, and their results only leave the browser if they decide to share them. |
+| The threshold | Below 3 is a priority gap | Ranking every cell | A 3 means "mostly in place." Anything lower is worth a conversation, and the prompt focuses on the top three. |
+
+## Where it came from
+
+AIRE began as a shareable spreadsheet in Google Sheets or Microsoft Excel, paired with a facilitation guide I used with stakeholders across different sectors. I shared it with educators, leaders, and technology stakeholders at the Learning Forward Winter Conference. The app turns that experience into something anyone can move through online, and the facilitation guide stays available as a download.
 
 ## Status
 
-This is a working **prototype**, a proof of concept that shows how the AIRE Method can become a tool organizations actually use to:
+A working prototype, not yet tested in the field. A pilot would look at three questions:
 
-- drive a structured technology adoption process,
-- build conversation and community around true organizational needs, and
-- give non-technical stakeholders a real seat at the table.
+- Do people outside technical roles complete the diagnostic and join the conversation about the results?
+- Do teams act on the 30-day steps?
+- When an organization takes the diagnostic again, have its priority gaps moved?
 
-## Background
+## Built with
 
-AIRE grew out of my work in platform and technology operations. I shared it with educators, leaders, and technology stakeholders at the **Learning Forward Winter Conference**, and the response was strong. People saw real, practical value in having a structured, inclusive way to approach adoption decisions.
+Next.js 14, React 18, TypeScript, Tailwind CSS, and Framer Motion, hosted on Vercel. The framework, cells, scoring, and prompt live in [`src/lib/assessment.ts`](src/lib/assessment.ts).
+
+```bash
+npm install
+npm run dev   # http://localhost:3000
+```
 
 ---
 
-*Created by Lyndonia · [LinkedIn](https://www.linkedin.com/in/lyndonia/) · [GitHub](https://github.com/byteswithdon)*
+AIRE™ and GAP™ are trademarks. © 2026 Bytes with Don · [LinkedIn](https://www.linkedin.com/company/byteswithdon/) · [GitHub](https://github.com/byteswithdon)
