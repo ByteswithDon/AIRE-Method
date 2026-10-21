@@ -219,8 +219,8 @@ export default function Home() {
               <div className="space-y-3 text-sm leading-relaxed font-medium" style={{ color: C.muted }}>
                 <p>The AIRE Method grew out of a real problem I kept running into across a wide range of organizations: teams adopting AI and technology without a shared process, which meant duplicate subscriptions, misaligned rollouts, shadow tools no one was watching, and people who never really got brought along. Almost every tool now has an AI component, so making these choices well matters more than ever.</p>
                 <p>It started as a Google Sheets evaluation tool I used to facilitate conversations with stakeholders. After presenting it at the <strong className="text-white">Learning Forward Winter Conference</strong> and watching leaders across sectors immediately recognize the gap it was filling, I decided to build it into something you could actually move through online.</p>
-                <p>This prototype shows how the framework works as an interactive tool. In a full production version, responses would live in Supabase and the scoring engine would generate tailored recommendations. <strong className="text-white">This demo is about the experience and the logic, not a live backend.</strong></p>
-                <p>I built it using AI-enabled prototyping (Claude + Claude Code) alongside my own platform and architecture background, which is exactly how I work with teams every day.</p>
+                <p>This prototype shows how the framework works as an interactive tool. In a full production version, responses would live in Supabase, and the scoring engine would generate tailored recommendations. <strong className="text-white">This demo is about the experience and the logic, not a live backend.</strong></p>
+                <p>I built it using AI-enabled prototyping (Claude + Claude Code) alongside my own platform and architecture background.</p>
               </div>
             </div>
           </motion.div>
